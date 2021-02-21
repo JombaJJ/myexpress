@@ -9,7 +9,8 @@ router.get('/:id?',
       if (err) {
         response.json(err);
       } else {
-        response.json(dbResult);
+        console.log(dbResult[0]);
+        response.json(dbResult[0]);
       }
     });
   } else {
@@ -17,6 +18,7 @@ router.get('/:id?',
       if (err) {
         response.json(err);
       } else {
+        console.log(dbResult);
         response.json(dbResult);
       }
     });
@@ -30,7 +32,7 @@ function(request, response) {
     if (err) {
       response.json(err);
     } else {
-      response.json(request.body);
+      response.json(request.body.insertId);
     }
   });
 });
