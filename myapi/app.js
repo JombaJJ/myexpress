@@ -8,6 +8,11 @@ var indexRouter = require('./routes/index');
 var bookRouter = require('./routes/book');
 var studentRouter = require('./routes/student');
 var courseRouter = require('./routes/course');
+var userRouter = require('./routes/user');
+var loginRouter = require('./routes/login');
+
+const basicAuth = require('express-basic-auth');
+
 
 var app = express();
 
@@ -15,6 +20,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(basicAuth({users: { 'admin': '1234' }}))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +31,8 @@ app.use('/', indexRouter);
 app.use('/book', bookRouter);
 app.use('/student', studentRouter);
 app.use('/course', courseRouter);
+app.use('/user', userRouter);
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
